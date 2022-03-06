@@ -1,6 +1,5 @@
 #include "BlynkCredentials.h"
 #include "led.h"
-#include "BlynkInterface.h"
 
 led over(overhead);
 led amb(ambient);

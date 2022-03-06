@@ -21,9 +21,6 @@
     <ClInclude Include="__vm\.LEDController.vsarduino.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BlynkCredentials.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="led.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -31,6 +28,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BlynkInterface.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BlynkCredentials.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

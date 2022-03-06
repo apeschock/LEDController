@@ -37,7 +37,8 @@ public:
         WiFi.mode(WIFI_STA);
         if (pass && strlen(pass)) {
             WiFi.begin(ssid, pass);
-        } else {
+        }
+        else {
             WiFi.begin(ssid);
         }
         while (WiFi.status() != WL_CONNECTED) {
@@ -51,46 +52,47 @@ public:
     }
 
     void config(const char* auth,
-                const char* domain = BLYNK_DEFAULT_DOMAIN,
-                uint16_t    port   = BLYNK_DEFAULT_PORT)
+        const char* domain = BLYNK_DEFAULT_DOMAIN,
+        uint16_t    port = BLYNK_DEFAULT_PORT)
     {
         Base::begin(auth);
         this->conn.begin(domain, port);
     }
 
     void config(const char* auth,
-                IPAddress   ip,
-                uint16_t    port = BLYNK_DEFAULT_PORT)
+        IPAddress   ip,
+        uint16_t    port = BLYNK_DEFAULT_PORT)
     {
         Base::begin(auth);
         this->conn.begin(ip, port);
     }
 
     void begin(const char* auth,
-               const char* domain = BLYNK_DEFAULT_DOMAIN,
-               uint16_t    port   = BLYNK_DEFAULT_PORT)
+        const char* domain = BLYNK_DEFAULT_DOMAIN,
+        uint16_t    port = BLYNK_DEFAULT_PORT)
     {
         config(auth, domain, port);
-        while(this->connect() != true) {}
+        while (this->connect() != true) {}
     }
 
     void begin(const char* auth,
-               const char* ssid,
-               const char* pass,
-               IPAddress   ip,
-               uint16_t    port   = BLYNK_DEFAULT_PORT)
+        const char* ssid,
+        const char* pass,
+        IPAddress   ip,
+        uint16_t    port = BLYNK_DEFAULT_PORT)
     {
         connectWiFi(ssid, pass);
         config(auth, ip, port);
-        while(this->connect() != true) {}
+        while (this->connect() != true) {}
     }
 
 };
 
 static WiFiClient _blynkWifiClient;
 static BlynkArduinoClient _blynkTransport(_blynkWifiClient);
+extern BlynkWifi Blynk;
 //BlynkWifi Blynk(_blynkTransport);
 
-//#include <BlynkWidgets.h>
+#include <BlynkWidgets.h>
 
 #endif

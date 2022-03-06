@@ -1,5 +1,7 @@
 #include "led.h"
 
+BlynkWifi Blynk(_blynkTransport);
+
 led::led(Strip strip){
     switch (strip) {
     case overhead:
@@ -28,4 +30,8 @@ void led::createRainbow() {
     uint8_t thisHue = beat8(10, 255);
     fill_rainbow(leds, 300, 10, 10);
     FastLED.show();
+}
+
+extern BLYNK_WRITE(V0) {
+
 }
