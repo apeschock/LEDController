@@ -27,10 +27,10 @@
     <ClInclude Include="BlynkSimpleEsp32Fixed.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BlynkInterface.h">
+    <ClInclude Include="BlynkCredentials.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BlynkCredentials.h">
+    <ClInclude Include="LEDManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -38,7 +38,7 @@
     <ClCompile Include="led.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BlynkInterface.cpp">
+    <ClCompile Include="LEDManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

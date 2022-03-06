@@ -1,20 +1,21 @@
 #include "BlynkCredentials.h"
-#include "led.h"
+#include "LEDManager.h"
+#include <EEPROM.h>
 
-led over(overhead);
-led amb(ambient);
-led lamp(swing);
+LedManager ledmanager = LedManager();
+
 
 void setup()
 {
     // Debug console
     Serial.begin(115200);
+    EEPROM.begin(512);
     
     BlynkStart();
 }
 
 void loop()
 {
-    over.createRainbow();
+    //over.createRainbow();
     Blynk.run();
 }
