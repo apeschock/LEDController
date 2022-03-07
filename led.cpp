@@ -27,9 +27,6 @@ void led::setColor() {
     for (int i = 0; i < numLeds; ++i) {
         leds[i] = CRGB(colorInfo.red, colorInfo.green, colorInfo.blue);
     }
-    Serial.println("Red " + (String)leds->r);
-    Serial.println("Green " + (String)leds->g);
-    Serial.println("Blue " + (String)leds->b);
     FastLED.show();
 }
 
@@ -37,8 +34,21 @@ void led::setBrightness(unsigned int brightness) {
     
 }
 
-void led::createRainbow() {
-    uint8_t thisHue = beat8(10, 255);
-    fill_rainbow(leds, 300, 10, 10);
+void led::turnOff() {
+    for (int i = 0; i < numLeds; ++i) {
+        leds[i] = CRGB(0,0,0);
+    }
     FastLED.show();
+}
+
+void led::createRainbow() {
+    fill_rainbow(leds, numLeds, gHue, 7);
+    FastLED.show();
+}
+
+void led::update() {
+    EVERY_N_MILLISECONDS(20) {
+        ++gHue;
+        //FastLED.show();
+    }
 }

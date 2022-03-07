@@ -1,6 +1,5 @@
 #include "BlynkCredentials.h"
 #include "LEDManager.h"
-#include <EEPROM.h>
 
 LedManager ledmanager = LedManager();
 
@@ -9,13 +8,15 @@ void setup()
 {
     // Debug console
     Serial.begin(115200);
-    EEPROM.begin(512);
+    Serial.print("Here");
+    Serial.flush();
     
     BlynkStart();
 }
 
 void loop()
 {
-    //over.createRainbow();
+    //ledmanager.update();
+
     Blynk.run();
 }

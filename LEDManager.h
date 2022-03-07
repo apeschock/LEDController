@@ -10,6 +10,7 @@ public:
 	led over = led(overhead);
 	led amb = led(ambient);
 	led swing = led(swing);
+	void update();
 };
 
 #endif
