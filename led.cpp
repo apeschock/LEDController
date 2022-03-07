@@ -30,8 +30,20 @@ void led::setColor() {
     FastLED.show();
 }
 
+void led::setColor(unsigned int r, unsigned int g, unsigned int b) {
+    for (int i = 0; i < numLeds; ++i) {
+        leds[i] = CRGB(r, g, b);
+    }
+    FastLED.show();
+}
+
 void led::setBrightness(unsigned int brightness) {
-    
+    double multiplier = (double)brightness / MAX_BRIGHTNESS;
+    colorInfo.brightness = brightness;
+    unsigned int red = lround(colorInfo.red * multiplier);
+    unsigned int green = lround(colorInfo.green * multiplier);
+    unsigned int blue = lround(colorInfo.blue * multiplier);
+    this->setColor(red, green, blue);
 }
 
 void led::turnOff() {
