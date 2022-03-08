@@ -19,9 +19,9 @@ class led{
     struct colorParams_t {
         unsigned int hue = 0;
         unsigned int brightness = 255;
-        unsigned int red = 0;
-        unsigned int blue = 0;
-        unsigned int green = 0;
+        unsigned int red = 255;
+        unsigned int blue = 255;
+        unsigned int green = 255;
     }colorInfo;
 
   private:

@@ -125,6 +125,25 @@ extern BLYNK_WRITE(V16) {
 	}
 }
 
-extern BLYNK_CONNECTED() {
 
+extern BLYNK_CONNECTED() {
+	//set blynk to mirror what the controller is set to on start up
+	//mostly to verify data is the same across the service and mcu.
+	Blynk.virtualWrite(V0, internLeds::pThis->over.colorInfo.red);
+	Blynk.virtualWrite(V1, internLeds::pThis->over.colorInfo.green);
+	Blynk.virtualWrite(V2, internLeds::pThis->over.colorInfo.blue);
+	Blynk.virtualWrite(V3, internLeds::pThis->over.colorInfo.brightness);
+	Blynk.virtualWrite(V4, false);
+	Blynk.virtualWrite(V5, internLeds::pThis->amb.colorInfo.red);
+	Blynk.virtualWrite(V6, internLeds::pThis->amb.colorInfo.green);
+	Blynk.virtualWrite(V7, internLeds::pThis->amb.colorInfo.blue);
+	Blynk.virtualWrite(V8, internLeds::pThis->amb.colorInfo.brightness);
+	Blynk.virtualWrite(V9, false);
+	Blynk.virtualWrite(V10, internLeds::pThis->swing.colorInfo.red);
+	Blynk.virtualWrite(V11, internLeds::pThis->swing.colorInfo.green);
+	Blynk.virtualWrite(V12, internLeds::pThis->swing.colorInfo.blue);
+	Blynk.virtualWrite(V13, internLeds::pThis->swing.colorInfo.brightness);
+	Blynk.virtualWrite(V14, false);
+	Blynk.virtualWrite(V15, false);
+	Blynk.virtualWrite(V16, 0);
 }

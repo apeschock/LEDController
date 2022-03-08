@@ -69,7 +69,7 @@ void led::turnOff() {
 
 void led::createRainbow() {
     //use fastleds build in rainbow generator
-    fill_rainbow(leds, numLeds, gHue, 7);
+    fill_rainbow(leds, numLeds, gHue, 15);
     FastLED.show();
 }
 
