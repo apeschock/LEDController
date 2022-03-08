@@ -24,6 +24,10 @@ led::~led() {
 }
 
 void led::setColor() {
+    if (colorInfo.brightness != 255) {
+        this->setBrightness(colorInfo.brightness);
+        return;
+    }
     for (int i = 0; i < numLeds; ++i) {
         leds[i] = CRGB(colorInfo.red, colorInfo.green, colorInfo.blue);
     }
@@ -38,8 +42,8 @@ void led::setColor(unsigned int r, unsigned int g, unsigned int b) {
 }
 
 void led::setBrightness(unsigned int brightness) {
-    double multiplier = (double)brightness / MAX_BRIGHTNESS;
     colorInfo.brightness = brightness;
+    double multiplier = (double)brightness / MAX_BRIGHTNESS;
     unsigned int red = lround(colorInfo.red * multiplier);
     unsigned int green = lround(colorInfo.green * multiplier);
     unsigned int blue = lround(colorInfo.blue * multiplier);
