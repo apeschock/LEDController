@@ -6,20 +6,19 @@
 
 enum Strip { overhead, ambient, swing };
 
-
-
 class led{
   public:
     led(Strip strip);
     ~led();
     void setColor();
+    void setColor(unsigned int r, unsigned int g, unsigned int b);
     void setBrightness(unsigned int brightness);
     void createRainbow();
     void update();
     void turnOff();
     struct colorParams_t {
         unsigned int hue = 0;
-        unsigned int brightness = 20;
+        unsigned int brightness = 255;
         unsigned int red = 0;
         unsigned int blue = 0;
         unsigned int green = 0;
@@ -29,6 +28,7 @@ class led{
     //Need constants for FastLED library.
     static const EOrder colorOrder = GRB;
     static const LEDColorCorrection colorCorrect = TypicalSMD5050;
+    const int MAX_BRIGHTNESS = 255;
     static const int numLedOverhead = 300;
     static const int pinLedOverhead = 4;
     static const int numLedAmbient = 20;
