@@ -6,8 +6,6 @@
 
 enum Strip { overhead, ambient, swing };
 
-
-
 class led{
   public:
     led(Strip strip);

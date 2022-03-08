@@ -2,20 +2,21 @@
 
 BlynkWifi Blynk(_blynkTransport);
 
+//this is to refernce the led objects from the blynk functions
 namespace internLeds {
 	LedManager* pThis;
 }
-
 LedManager::LedManager() {
 	internLeds::pThis = this;
 }
 
-
+//call update for these 2 strands for patterns to work.
 void LedManager::update() {
 	over.update();
 	amb.update();
 }
 
+//external blynk methods that get called when theres a change.
 extern BLYNK_WRITE(V0) {
 	internLeds::pThis->over.colorInfo.red = param.asInt();
 	internLeds::pThis->over.setColor();
@@ -122,4 +123,8 @@ extern BLYNK_WRITE(V16) {
 
 		break;
 	}
+}
+
+extern BLYNK_CONNECTED() {
+
 }
