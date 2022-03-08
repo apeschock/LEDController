@@ -33,7 +33,7 @@ class led{
     static const int pinLedOverhead = 4;
     static const int numLedAmbient = 20;
     static const int pinLedAmbient = 16;
-    static const int numLedSwing = 0;
+    static const int numLedSwing = 2;
     static const int pinLedSwing = 17;
     uint8_t gHue = 0;
     CRGB* leds;
