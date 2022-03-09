@@ -23,7 +23,6 @@ class led{
     void switchPower(bool power);
     struct colorParams_t {
         bool powerState = false;
-        unsigned int hue = 0;
         unsigned int brightness = 255;
         unsigned int red = 255;
         unsigned int blue = 255;
