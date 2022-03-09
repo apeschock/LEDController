@@ -20,8 +20,9 @@ class led{
     void juggle();
     void bpm();
     void update();
-    void turnOff();
+    void switchPower(bool power);
     struct colorParams_t {
+        bool powerState = false;
         unsigned int hue = 0;
         unsigned int brightness = 255;
         unsigned int red = 255;

@@ -26,6 +26,10 @@ led::~led() {
 }
 
 void led::setColor() {
+    //only if powerSwitch is on
+    if (!colorInfo.powerState) {
+        return;
+    }
     //setting the color from the colorInfo struct in led.h
     //if the brightness is set, let the setBrightness function handle it.
     if (colorInfo.brightness != 255) {
@@ -46,9 +50,29 @@ void led::setColor(unsigned int r, unsigned int g, unsigned int b) {
     FastLED.show();
 }
 
+void led::switchPower(bool power) {
+    //set the saved power state
+    colorInfo.powerState = power;
+    if (power) {
+        //this must be called for the brightness slider to have affect.
+        setBrightness(colorInfo.brightness);
+    }
+    else {
+        //display all black on the strip
+        for (int i = 0; i < numLeds; ++i) {
+            leds[i] = CRGB(0, 0, 0);
+        }
+        FastLED.show();
+    }
+}
+
 void led::setBrightness(unsigned int brightness) {
     //first set the brightness in the struct
     colorInfo.brightness = brightness;
+    //return out if the powerSwitch is off
+    if (!colorInfo.powerState) {
+        return;
+    }
     //make a multiplier based on the ratio between the set brightness and the max
     double multiplier = (double)brightness / MAX_BRIGHTNESS;
     //get new RGB values from the set colors multiplied by the brightness
@@ -57,14 +81,6 @@ void led::setBrightness(unsigned int brightness) {
     unsigned int blue = lround(colorInfo.blue * multiplier);
     //set the modified RGB values to the strip
     this->setColor(red, green, blue);
-}
-
-void led::turnOff() {
-    //display all black on the strip
-    for (int i = 0; i < numLeds; ++i) {
-        leds[i] = CRGB(0,0,0);
-    }
-    FastLED.show();
 }
 
 void led::rainbow() {
