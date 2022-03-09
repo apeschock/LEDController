@@ -37,14 +37,7 @@ extern BLYNK_WRITE(V3) {
 }
 
 extern BLYNK_WRITE(V4) {
-	switch (param.asInt()) {
-	case 0:
-		internLeds::pThis->over.turnOff();
-		break;
-	case 1:
-		internLeds::pThis->over.setColor();
-		break;
-	}
+	internLeds::pThis->over.switchPower(param.asInt());
 }
 
 extern BLYNK_WRITE(V5) {
@@ -67,23 +60,16 @@ extern BLYNK_WRITE(V8) {
 }
 
 extern BLYNK_WRITE(V9) {
-	switch (param.asInt()) {
-	case 0:
-		internLeds::pThis->amb.turnOff();
-		break;
-	case 1:
-		internLeds::pThis->amb.setColor();
-		break;
-	}
+	internLeds::pThis->amb.switchPower(param.asInt());
 }
 
 extern BLYNK_WRITE(V10) {
-	internLeds::pThis->swing.colorInfo.blue = param.asInt();
+	internLeds::pThis->swing.colorInfo.red = param.asInt();
 	internLeds::pThis->swing.setColor();
 }
 
 extern BLYNK_WRITE(V11) {
-	internLeds::pThis->swing.colorInfo.blue = param.asInt();
+	internLeds::pThis->swing.colorInfo.green = param.asInt();
 	internLeds::pThis->swing.setColor();
 }
 
@@ -97,14 +83,7 @@ extern BLYNK_WRITE(V13) {
 }
 
 extern BLYNK_WRITE(V14) {
-	switch (param.asInt()) {
-	case 0:
-		internLeds::pThis->swing.turnOff();
-		break;
-	case 1:
-		internLeds::pThis->swing.setColor();
-		break;
-	}
+	internLeds::pThis->swing.switchPower(param.asInt());
 }
 
 extern BLYNK_WRITE(V15) {
@@ -112,19 +91,29 @@ extern BLYNK_WRITE(V15) {
 }
 
 extern BLYNK_WRITE(V16) {
-	switch (param.asInt()) {
-	case 0:
-
-		break;
-	case 1:
-		internLeds::pThis->over.createRainbow();
-		break;
-	case 2:
-
-		break;
-	}
+	internLeds::pThis->over.setColor();
+	internLeds::pThis->over.currentPattern = param.asInt();
 }
 
-extern BLYNK_CONNECTED() {
 
+extern BLYNK_CONNECTED() {
+	//set blynk to mirror what the controller is set to on start up
+	//mostly to verify data is the same across the service and mcu.
+	Blynk.virtualWrite(V0, internLeds::pThis->over.colorInfo.red);
+	Blynk.virtualWrite(V1, internLeds::pThis->over.colorInfo.green);
+	Blynk.virtualWrite(V2, internLeds::pThis->over.colorInfo.blue);
+	Blynk.virtualWrite(V3, internLeds::pThis->over.colorInfo.brightness);
+	Blynk.virtualWrite(V4, internLeds::pThis->over.colorInfo.powerState);
+	Blynk.virtualWrite(V5, internLeds::pThis->amb.colorInfo.red);
+	Blynk.virtualWrite(V6, internLeds::pThis->amb.colorInfo.green);
+	Blynk.virtualWrite(V7, internLeds::pThis->amb.colorInfo.blue);
+	Blynk.virtualWrite(V8, internLeds::pThis->amb.colorInfo.brightness);
+	Blynk.virtualWrite(V9, internLeds::pThis->amb.colorInfo.powerState);
+	Blynk.virtualWrite(V10, internLeds::pThis->swing.colorInfo.red);
+	Blynk.virtualWrite(V11, internLeds::pThis->swing.colorInfo.green);
+	Blynk.virtualWrite(V12, internLeds::pThis->swing.colorInfo.blue);
+	Blynk.virtualWrite(V13, internLeds::pThis->swing.colorInfo.brightness);
+	Blynk.virtualWrite(V14, internLeds::pThis->swing.colorInfo.powerState);
+	Blynk.virtualWrite(V15, false);
+	Blynk.virtualWrite(V16, internLeds::pThis->over.currentPattern);
 }

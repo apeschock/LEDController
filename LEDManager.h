@@ -9,7 +9,7 @@ public:
 	LedManager();
 	led over = led(overhead);
 	led amb = led(ambient);
-	led swing = led(swing);
+	led swing = led(swingable);
 	void update();
 };
 
