@@ -134,6 +134,9 @@ void led::update() {
         ++gHue;
     }
     (this->*patterns[currentPattern -1])();
+    if (colorInfo.brightness != MAX_BRIGHTNESS) {
+        fadeToBlackBy(leds, numLeds, MAX_BRIGHTNESS - colorInfo.brightness);
+    }
     FastLED.show();
     FastLED.delay(1000 / 120);
 }
