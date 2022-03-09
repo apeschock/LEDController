@@ -14,7 +14,7 @@ led::led(Strip strip){
         numLeds = numLedAmbient;
         FastLED.addLeds<WS2812B, pinLedAmbient, colorOrder>(leds, numLedAmbient).setCorrection(colorCorrect);
         break;
-    case swing:
+    case swingable:
         leds = new CRGB[numLedSwing];
         numLeds = numLedSwing;
         FastLED.addLeds<WS2812B, pinLedSwing, colorOrder>(leds, numLedSwing).setCorrection(colorCorrect);

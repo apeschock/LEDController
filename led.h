@@ -4,7 +4,7 @@
 //need fastLED to control
 #include <FastLED.h>
 
-enum Strip { overhead, ambient, swing };
+enum Strip { overhead, ambient, swingable };
 
 class led{
   public:
@@ -29,11 +29,11 @@ class led{
     static const EOrder colorOrder = GRB;
     static const LEDColorCorrection colorCorrect = TypicalSMD5050;
     const int MAX_BRIGHTNESS = 255;
-    static const int numLedOverhead = 300;
+    static const int numLedOverhead = 3;
     static const int pinLedOverhead = 4;
     static const int numLedAmbient = 20;
     static const int pinLedAmbient = 16;
-    static const int numLedSwing = 2;
+    static const int numLedSwing = 20;
     static const int pinLedSwing = 17;
     uint8_t gHue = 0;
     CRGB* leds;

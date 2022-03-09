@@ -78,12 +78,12 @@ extern BLYNK_WRITE(V9) {
 }
 
 extern BLYNK_WRITE(V10) {
-	internLeds::pThis->swing.colorInfo.blue = param.asInt();
+	internLeds::pThis->swing.colorInfo.red = param.asInt();
 	internLeds::pThis->swing.setColor();
 }
 
 extern BLYNK_WRITE(V11) {
-	internLeds::pThis->swing.colorInfo.blue = param.asInt();
+	internLeds::pThis->swing.colorInfo.green = param.asInt();
 	internLeds::pThis->swing.setColor();
 }
 
