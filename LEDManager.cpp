@@ -112,17 +112,8 @@ extern BLYNK_WRITE(V15) {
 }
 
 extern BLYNK_WRITE(V16) {
-	switch (param.asInt()) {
-	case 0:
-
-		break;
-	case 1:
-		internLeds::pThis->over.createRainbow();
-		break;
-	case 2:
-
-		break;
-	}
+	internLeds::pThis->over.setColor();
+	internLeds::pThis->over.currentPattern = param.asInt();
 }
 
 

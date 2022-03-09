@@ -16,7 +16,7 @@ void setup()
 
 void loop()
 {
-    //ledmanager.update();
+    ledmanager.update();
 
     //get updates from blynk and remain connected.
     Blynk.run();

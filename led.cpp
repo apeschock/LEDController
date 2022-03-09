@@ -67,16 +67,57 @@ void led::turnOff() {
     FastLED.show();
 }
 
-void led::createRainbow() {
-    //use fastleds build in rainbow generator
+void led::rainbow() {
     fill_rainbow(leds, numLeds, gHue, 15);
-    FastLED.show();
+}
+
+void led::rainbowGlitter() {
+    rainbow();
+    if (random8() < 70) {
+        leds[random16(numLeds)] += CRGB::White;
+    }
+}
+
+void led::confetti() {
+    fadeToBlackBy(leds, numLeds, 10);
+    int pos = random16(numLeds);
+    leds[pos] += CHSV(gHue + random8(64), 200, 255);
+}
+
+void led::sinelon() {
+    fadeToBlackBy(leds, numLeds, 20);
+    int pos = beatsin16(13, 0, numLeds - 1);
+    leds[pos] += CHSV(gHue, 255, 192);
+}
+
+void led::juggle() {
+    fadeToBlackBy(leds, numLeds, 20);
+    uint8_t dothue = 0;
+    for (int i = 0; i < 8; i++) {
+        leds[beatsin16(i + 7, 0, numLeds - 1)] |= CHSV(dothue, 200, 255);
+        dothue += 32;
+    }
+}
+
+void led::bpm() {
+    uint8_t BeatsPerMinute = 62;
+    CRGBPalette16 palette = PartyColors_p;
+    uint8_t beat = beatsin8(BeatsPerMinute, 64, 255);
+    for (int i = 0; i < numLeds; i++) {
+        leds[i] = ColorFromPalette(palette, gHue + (i * 2), beat - gHue + (i * 10));
+    }
 }
 
 void led::update() {
+    //if no pattern then return out
+    if (!currentPattern) {
+        return;
+    }
     //for the patterns to animate
     EVERY_N_MILLISECONDS(20) {
         ++gHue;
-        //FastLED.show();
     }
+    (this->*patterns[currentPattern -1])();
+    FastLED.show();
+    FastLED.delay(1000 / 120);
 }
