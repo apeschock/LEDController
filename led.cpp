@@ -126,7 +126,7 @@ void led::bpm() {
 
 void led::update() {
     //if no pattern then return out
-    if (!currentPattern) {
+    if (!currentPattern || !colorInfo.powerState) {
         return;
     }
     //for the patterns to animate
