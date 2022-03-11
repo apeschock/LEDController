@@ -1,6 +1,7 @@
 #include "LEDManager.h"
 
 BlynkWifi Blynk(_blynkTransport);
+bool synced = false;
 
 //this is to refernce the led objects from the blynk functions
 namespace internLeds {
@@ -87,12 +88,31 @@ extern BLYNK_WRITE(V14) {
 }
 
 extern BLYNK_WRITE(V15) {
-
+	if (param.asInt()) {
+		Blynk.virtualWrite(V17, internLeds::pThis->over.currentPattern);
+		synced = true;
+	}
+	else {
+		synced = false;
+	}
 }
 
 extern BLYNK_WRITE(V16) {
 	internLeds::pThis->over.setColor();
 	internLeds::pThis->over.currentPattern = param.asInt();
+	if (synced) {
+		Blynk.virtualWrite(V17, internLeds::pThis->over.currentPattern);
+		internLeds::pThis->amb.currentPattern = param.asInt();
+	}
+}
+
+extern BLYNK_WRITE(V17) {
+	if (synced) {
+		Blynk.virtualWrite(V17, internLeds::pThis->over.currentPattern);
+		return;
+	}
+	internLeds::pThis->amb.setColor();
+	internLeds::pThis->amb.currentPattern = param.asInt();
 }
 
 
@@ -116,4 +136,5 @@ extern BLYNK_CONNECTED() {
 	Blynk.virtualWrite(V14, internLeds::pThis->swing.colorInfo.powerState);
 	Blynk.virtualWrite(V15, false);
 	Blynk.virtualWrite(V16, internLeds::pThis->over.currentPattern);
+	Blynk.virtualWrite(V17, internLeds::pThis->amb.currentPattern);
 }
