@@ -9,9 +9,18 @@ void setup()
 {
     // Debug console
     Serial.begin(115200);
+
+    //set the 
+    FastLED.clear();
+
+    //show loading on the leds
+    ledmanager.loading();
     
     //launch the blynk service
     BlynkStart();
+
+    //getting here means blynk has connected
+    ledmanager.connected();
 }
 
 void loop()
