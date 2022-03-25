@@ -134,7 +134,7 @@ extern BLYNK_CONNECTED() {
 	Blynk.virtualWrite(V12, internLeds::pThis->swing.colorInfo.blue);
 	Blynk.virtualWrite(V13, internLeds::pThis->swing.colorInfo.brightness);
 	Blynk.virtualWrite(V14, internLeds::pThis->swing.colorInfo.powerState);
-	Blynk.virtualWrite(V15, false);
+	Blynk.virtualWrite(V15, synced);
 	Blynk.virtualWrite(V16, internLeds::pThis->over.currentPattern);
 	Blynk.virtualWrite(V17, internLeds::pThis->amb.currentPattern);
 }
