@@ -19,6 +19,7 @@ class led{
     void sinelon();
     void juggle();
     void bpm();
+    void slowFadeTo(unsigned int desiredBrightness);
     void update();
     void switchPower(bool power);
     struct colorParams_t {
