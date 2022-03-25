@@ -70,7 +70,7 @@ void led::setBrightness(unsigned int brightness) {
     //first set the brightness in the struct
     colorInfo.brightness = brightness;
     //return out if the powerSwitch is off
-    if (!colorInfo.powerState) {
+    if (!colorInfo.powerState || currentPattern) {
         return;
     }
     //make a multiplier based on the ratio between the set brightness and the max
