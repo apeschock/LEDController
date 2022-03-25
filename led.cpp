@@ -130,7 +130,7 @@ void led::update() {
         return;
     }
     //for the patterns to animate
-    EVERY_N_MILLISECONDS(20) {
+    EVERY_N_MILLISECONDS(15) {
         ++gHue;
     }
     (this->*patterns[currentPattern -1])();
