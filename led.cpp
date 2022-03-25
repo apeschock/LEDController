@@ -128,7 +128,7 @@ void led::slowFadeTo(unsigned int desiredBrightness) {
     while (desiredBrightness < colorInfo.brightness) {
         fadeToBlackBy(leds, numLeds, 1);
         colorInfo.brightness -= 1;
-        FastLED.delay(5);
+        FastLED.delay(12);
     }
     FastLED.show();
 }
