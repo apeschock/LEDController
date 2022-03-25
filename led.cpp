@@ -124,13 +124,22 @@ void led::bpm() {
     }
 }
 
+void led::slowFadeTo(unsigned int desiredBrightness) {
+    while (desiredBrightness < colorInfo.brightness) {
+        fadeToBlackBy(leds, numLeds, 1);
+        colorInfo.brightness -= 1;
+        FastLED.delay(10);
+    }
+    FastLED.show();
+}
+
 void led::update() {
-    //if no pattern then return out
+    //if no pattern or power then return out
     if (!currentPattern || !colorInfo.powerState) {
         return;
     }
     //for the patterns to animate
-    EVERY_N_MILLISECONDS(20) {
+    EVERY_N_MILLISECONDS(15) {
         ++gHue;
     }
     (this->*patterns[currentPattern -1])();
