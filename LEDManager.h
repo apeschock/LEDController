@@ -11,6 +11,8 @@ public:
 	led amb = led(ambient);
 	led swing = led(swingable);
 	void update();
+	void loading();
+	void connected();
 };
 
 #endif

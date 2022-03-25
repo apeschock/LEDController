@@ -17,6 +17,17 @@ void LedManager::update() {
 	amb.update();
 }
 
+//show status during loading and successful connection
+void LedManager::loading() {
+	over.setColor(50, 0, 0);
+}
+
+void LedManager::connected() {
+	over.setColor(0, 0, 50);
+	over.slowFadeTo(0);
+	over.setBrightness(255);
+}
+
 //external blynk methods that get called when theres a change.
 extern BLYNK_WRITE(V0) {
 	internLeds::pThis->over.colorInfo.red = param.asInt();
