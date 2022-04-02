@@ -10,6 +10,8 @@ class led{
   public:
     led(Strip strip);
     ~led();
+    CRGB* getLeds();
+    int getNumLeds();
     void setColor();
     void setColor(unsigned int r, unsigned int g, unsigned int b);
     void setBrightness(unsigned int brightness);
@@ -36,9 +38,9 @@ class led{
     static const EOrder colorOrder = GRB;
     static const LEDColorCorrection colorCorrect = TypicalSMD5050;
     const int MAX_BRIGHTNESS = 255;
-    static const int numLedOverhead = 87;
+    static const int numLedOverhead = 108;
     static const int pinLedOverhead = 4;
-    static const int numLedAmbient = 20;
+    static const int numLedAmbient = 85;
     static const int pinLedAmbient = 16;
     static const int numLedSwing = 20;
     static const int pinLedSwing = 17;

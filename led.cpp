@@ -25,6 +25,14 @@ led::~led() {
     delete[] leds;
 }
 
+CRGB* led::getLeds() {
+    return leds;
+}
+
+int led::getNumLeds() {
+    return numLeds;
+}
+
 void led::setColor() {
     //only if powerSwitch is on
     if (!colorInfo.powerState) {
@@ -58,7 +66,7 @@ void led::switchPower(bool power) {
         setBrightness(colorInfo.brightness);
     }
     else {
-        //display all black on the strip
+        //display all black on the strip without destroying current data
         for (int i = 0; i < numLeds; ++i) {
             leds[i] = CRGB(0, 0, 0);
         }
@@ -85,6 +93,14 @@ void led::setBrightness(unsigned int brightness) {
 
 void led::rainbow() {
     fill_rainbow(leds, numLeds, gHue, 15);
+    if (numLeds > 100) {
+        Serial.print("over");
+        Serial.println(gHue);
+    }
+    else {
+        Serial.print("amb");
+        Serial.println(gHue);
+    }
 }
 
 void led::rainbowGlitter() {
@@ -125,10 +141,11 @@ void led::bpm() {
 }
 
 void led::slowFadeTo(unsigned int desiredBrightness) {
+    while (desiredBrightness > colorInfo.brightness){
+        setBrightness(++colorInfo.brightness);
+    }
     while (desiredBrightness < colorInfo.brightness) {
-        fadeToBlackBy(leds, numLeds, 1);
-        colorInfo.brightness -= 1;
-        FastLED.delay(12);
+        setBrightness(--colorInfo.brightness);
     }
     FastLED.show();
 }
