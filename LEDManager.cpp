@@ -13,6 +13,14 @@ LedManager::LedManager() {
 
 //call update for these 2 strands for patterns to work.
 void LedManager::update() {
+	EVERY_N_MILLIS(15) {
+		if (over.currentPattern != 0) {
+			over.incHue();
+		}
+		if (amb.currentPattern != 0) {
+			amb.incHue();
+		}
+	}
 	over.update();
 	if (synced) {
 		for (int i = 0; i < amb.getNumLeds(); ++i) {

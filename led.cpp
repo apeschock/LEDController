@@ -93,14 +93,6 @@ void led::setBrightness(unsigned int brightness) {
 
 void led::rainbow() {
     fill_rainbow(leds, numLeds, gHue, 15);
-    if (numLeds > 100) {
-        Serial.print("over");
-        Serial.println(gHue);
-    }
-    else {
-        Serial.print("amb");
-        Serial.println(gHue);
-    }
 }
 
 void led::rainbowGlitter() {
@@ -155,14 +147,13 @@ void led::update() {
     if (!currentPattern || !colorInfo.powerState) {
         return;
     }
-    //for the patterns to animate
-    EVERY_N_MILLISECONDS(15) {
-        ++gHue;
-    }
     (this->*patterns[currentPattern -1])();
     if (colorInfo.brightness != MAX_BRIGHTNESS) {
         fadeToBlackBy(leds, numLeds, MAX_BRIGHTNESS - colorInfo.brightness);
     }
     FastLED.show();
-    FastLED.delay(1000 / 120);
+}
+
+void led::incHue() {
+    ++gHue;
 }

@@ -23,6 +23,7 @@ class led{
     void bpm();
     void slowFadeTo(unsigned int desiredBrightness);
     void update();
+    void incHue();
     void switchPower(bool power);
     struct colorParams_t {
         bool powerState = false;
