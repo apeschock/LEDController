@@ -25,6 +25,14 @@ led::~led() {
     delete[] leds;
 }
 
+CRGB* led::getLeds() {
+    return leds;
+}
+
+int led::getNumLeds() {
+    return numLeds;
+}
+
 void led::setColor() {
     //only if powerSwitch is on
     if (!colorInfo.powerState) {
@@ -58,7 +66,7 @@ void led::switchPower(bool power) {
         setBrightness(colorInfo.brightness);
     }
     else {
-        //display all black on the strip
+        //display all black on the strip without destroying current data
         for (int i = 0; i < numLeds; ++i) {
             leds[i] = CRGB(0, 0, 0);
         }
@@ -125,10 +133,11 @@ void led::bpm() {
 }
 
 void led::slowFadeTo(unsigned int desiredBrightness) {
+    while (desiredBrightness > colorInfo.brightness){
+        setBrightness(++colorInfo.brightness);
+    }
     while (desiredBrightness < colorInfo.brightness) {
-        fadeToBlackBy(leds, numLeds, 1);
-        colorInfo.brightness -= 1;
-        FastLED.delay(12);
+        setBrightness(--colorInfo.brightness);
     }
     FastLED.show();
 }
@@ -138,14 +147,13 @@ void led::update() {
     if (!currentPattern || !colorInfo.powerState) {
         return;
     }
-    //for the patterns to animate
-    EVERY_N_MILLISECONDS(15) {
-        ++gHue;
-    }
     (this->*patterns[currentPattern -1])();
     if (colorInfo.brightness != MAX_BRIGHTNESS) {
         fadeToBlackBy(leds, numLeds, MAX_BRIGHTNESS - colorInfo.brightness);
     }
     FastLED.show();
-    FastLED.delay(1000 / 120);
+}
+
+void led::incHue() {
+    ++gHue;
 }

@@ -25,6 +25,7 @@ void setup()
 
 void loop()
 {
+    //Call an update everytime so that patterns will animate
     ledmanager.update();
 
     //get updates from blynk and remain connected.
