@@ -17,7 +17,7 @@ void LedManager::update() {
 		if (over.currentPattern != 0) {
 			over.incHue();
 		}
-		if (amb.currentPattern != 0) {
+		if (amb.currentPattern != 0 && !synced) {
 			amb.incHue();
 		}
 	}
