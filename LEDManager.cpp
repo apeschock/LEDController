@@ -128,6 +128,9 @@ extern BLYNK_WRITE(V15) {
 	}
 	else {
 		synced = false;
+		if (!(internLeds::pThis->amb.colorInfo.powerState)) {
+			internLeds::pThis->amb.setColor(0, 0, 0);
+		}
 	}
 }
 
