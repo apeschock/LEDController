@@ -1,9 +1,10 @@
 #include "BlynkCredentials.h"
 #include "LEDManager.h"
+#include "WifiControl.h"
 
 //make a global led manager to access the leds from anywhere.
 LedManager ledmanager = LedManager();
-
+WifiControl wifi;
 
 void setup()
 {
@@ -16,6 +17,9 @@ void setup()
     //show loading on the leds
     ledmanager.loading();
     
+    //start the wifi service
+    wifi.startWifi();
+
     //launch the blynk service
     BlynkStart();
 
@@ -27,6 +31,9 @@ void loop()
 {
     //Call an update everytime so that patterns will animate
     ledmanager.update();
+
+    //reconnect to wifi if the connection is lost
+    wifi.checkConnection();
 
     //get updates from blynk and remain connected.
     Blynk.run();
