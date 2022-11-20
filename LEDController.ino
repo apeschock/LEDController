@@ -1,4 +1,4 @@
-#include "BlynkCredentials.h"
+#include "BlynkControl.h"
 #include "LEDManager.h"
 #include "WifiControl.h"
 

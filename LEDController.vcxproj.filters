@@ -36,6 +36,9 @@
     <ClInclude Include="WifiControl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="BlynkControl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="led.cpp">
@@ -44,5 +47,8 @@
     <ClCompile Include="LEDManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
   </ItemGroup>
 </Project>

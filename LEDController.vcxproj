@@ -107,6 +107,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BlynkControl.h" />
     <ClInclude Include="BlynkCredentials.h" />
     <ClInclude Include="BlynkSimpleEsp32Fixed.h">
       <FileType>CppCode</FileType>
@@ -121,6 +122,9 @@
   <ItemGroup>
     <ClCompile Include="led.cpp" />
     <ClCompile Include="LEDManager.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
   </ItemGroup>
   <PropertyGroup>
     <DebuggerFlavor>VisualMicroDebugger</DebuggerFlavor>
