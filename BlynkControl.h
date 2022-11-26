@@ -15,6 +15,12 @@ public:
 		char auth[] = BLYNK_AUTH_TOKEN;
 		Blynk.begin(auth);
 	}
+	static bool confirmBlynkConnection() {
+		if (!Blynk.connected()) {
+			return Blynk.connect();
+		}
+		return true;
+	}
 };
 
 #endif // !BLYNKCONTROL

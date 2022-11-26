@@ -34,6 +34,7 @@ void loop()
 
     //reconnect to wifi if the connection is lost
     wifi.checkConnection();
+    BlynkStart::confirmBlynkConnection();
 
     //get updates from blynk and remain connected.
     Blynk.run();
