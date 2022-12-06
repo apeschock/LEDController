@@ -21,22 +21,22 @@
     <ClInclude Include="__vm\.LEDController.vsarduino.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="led.h">
+    <ClInclude Include="BlynkControl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BlynkCredentials.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BlynkSimpleEsp32Fixed.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BlynkCredentials.h">
+    <ClInclude Include="led.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="LEDManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="WifiControl.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BlynkControl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -47,8 +47,5 @@
     <ClCompile Include="LEDManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="ReadMe.txt" />
   </ItemGroup>
 </Project>
