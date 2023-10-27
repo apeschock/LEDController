@@ -17,6 +17,7 @@
 
 #define BLYNK_SEND_ATOMIC
 
+#include "BlynkCredentials.h"
 #include <BlynkApiArduino.h>
 #include <Blynk/BlynkProtocol.h>
 #include <Adapters/BlynkArduinoClient.h>

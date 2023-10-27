@@ -54,8 +54,15 @@ void led::setColor(unsigned int r, unsigned int g, unsigned int b) {
     //set the color based on rgb values passed in
     for (int i = 0; i < numLeds; ++i) {
         leds[i] = CRGB(r, g, b);
-    }
+    }    
     FastLED.show();
+}
+
+void led::setColorAndSave(unsigned int r, unsigned int g, unsigned int b) {
+    this->setColor(r, g, b);
+    colorInfo.red = r;
+    colorInfo.green = g;
+    colorInfo.blue = b;
 }
 
 void led::switchPower(bool power) {
@@ -142,7 +149,7 @@ void led::slowFadeTo(unsigned int desiredBrightness) {
     FastLED.show();
 }
 
-void led::update() {
+void led::updatePattern() {
     //if no pattern or power then return out
     if (!currentPattern || !colorInfo.powerState) {
         return;

@@ -1,6 +1,5 @@
 #ifndef BLYNKCONTROL
 #define BLYNKCONTROL
-#include "BlynkCredentials.h"
 
 #define BLYNK_PRINT Serial
 

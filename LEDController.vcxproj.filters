@@ -15,37 +15,38 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="LEDController.ino" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="__vm\.LEDController.vsarduino.h">
+    <ClCompile Include="LEDController.ino" />
+    <ClCompile Include="BlynkControl.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BlynkControl.h">
+    </ClCompile>
+    <ClCompile Include="BlynkCredentials.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BlynkCredentials.h">
+    </ClCompile>
+    <ClCompile Include="BlynkSimpleEsp32Fixed.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BlynkSimpleEsp32Fixed.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="led.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LEDManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="WifiControl.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
+    </ClCompile>
     <ClCompile Include="led.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="led.h">
+      <Filter>Header Files</Filter>
     </ClCompile>
     <ClCompile Include="LEDManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="LEDManager.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="WifiControl.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="HomespanSetup.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HomeSpanLed.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

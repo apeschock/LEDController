@@ -12,7 +12,7 @@ LedManager::LedManager() {
 }
 
 //call update for these 2 strands for patterns to work.
-void LedManager::update() {
+void LedManager::updatePattern() {
 	EVERY_N_MILLIS(15) {
 		if (over.currentPattern != 0) {
 			over.incHue();
@@ -21,7 +21,7 @@ void LedManager::update() {
 			amb.incHue();
 		}
 	}
-	over.update();
+	over.updatePattern();
 	if (synced) {
 		for (int i = 0; i < amb.getNumLeds(); ++i) {
 			amb.getLeds()[i] = over.getLeds()[i];
@@ -29,7 +29,7 @@ void LedManager::update() {
 		FastLED.show();
 		return;
 	}
-	amb.update();
+	amb.updatePattern();
 }
 
 //show status during loading and successful connection
@@ -50,6 +50,8 @@ void LedManager::connected() {
 		FastLED.delay(10);
 	}
 }
+
+#pragma region Blynk Writes
 
 //external blynk methods that get called when theres a change.
 extern BLYNK_WRITE(V0) {
@@ -184,3 +186,5 @@ extern BLYNK_CONNECTED() {
 	Blynk.virtualWrite(V17, internLeds::pThis->amb.currentPattern);
 	Blynk.virtualWrite(V18, 0); //reset off
 }
+
+#pragma endregion

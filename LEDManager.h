@@ -10,7 +10,7 @@ public:
 	led over = led(overhead);
 	led amb = led(ambient);
 	led swing = led(swingable);
-	void update();
+	void updatePattern();
 	void loading();
 	void connected();
 };

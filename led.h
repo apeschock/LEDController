@@ -2,6 +2,7 @@
 #define LEDCLASS
 
 //need fastLED to control
+#define FASTLED_INTERNAL
 #include <FastLED.h>
 
 enum Strip { overhead, ambient, swingable };
@@ -14,6 +15,7 @@ class led{
     int getNumLeds();
     void setColor();
     void setColor(unsigned int r, unsigned int g, unsigned int b);
+    void setColorAndSave(unsigned int r, unsigned int g, unsigned int b);
     void setBrightness(unsigned int brightness);
     void rainbow();
     void rainbowGlitter();
@@ -22,7 +24,7 @@ class led{
     void juggle();
     void bpm();
     void slowFadeTo(unsigned int desiredBrightness);
-    void update();
+    void updatePattern();
     void incHue();
     void switchPower(bool power);
     struct colorParams_t {
@@ -32,7 +34,7 @@ class led{
         unsigned int blue = 255;
         unsigned int green = 255;
     }colorInfo;
-    unsigned int currentPattern = 0; 
+    unsigned int currentPattern = 0;
 
   private:
     //Need constants for FastLED library.
@@ -41,7 +43,7 @@ class led{
     const int MAX_BRIGHTNESS = 255;
     static const int numLedOverhead = 107;
     static const int pinLedOverhead = 4;
-    static const int numLedAmbient = 85;
+    static const int numLedAmbient = 84;
     static const int pinLedAmbient = 16;
     static const int numLedSwing = 20;
     static const int pinLedSwing = 17;
