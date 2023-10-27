@@ -5,7 +5,7 @@
 
 void setupHomespan(LedManager* ledManager) {
 	//setup HomeSpan for Homekit integration
-	homeSpan.begin(Category::Lighting, "Overhead");
+	homeSpan.begin(Category::Lighting, "EspLights");
 	new SpanAccessory();
 		new Service::AccessoryInformation();
 			new Characteristic::Identify();
