@@ -40,12 +40,24 @@
     <ClCompile Include="WifiControl.h">
       <Filter>Header Files</Filter>
     </ClCompile>
+    <ClCompile Include="WizLight.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="HomespanSetup.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="HomeSpanLed.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WizLight.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WizLightsSetup.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HomeSpanWiz.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

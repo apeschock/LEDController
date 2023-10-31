@@ -1,6 +1,5 @@
 #ifndef HomespanSetup
 #define HomespanSetup
-#include <HomeSpan.h>
 #include "HomeSpanLed.h"
 
 void setupHomespan(LedManager* ledManager) {
@@ -17,7 +16,6 @@ void setupHomespan(LedManager* ledManager) {
 			new Characteristic::Identify();
 			new Characteristic::Name("Ambient");
 		new HSLed(&ledManager->amb);
-
 }
 
 

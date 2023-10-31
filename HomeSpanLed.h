@@ -1,6 +1,5 @@
 #ifndef HomeSpanLed
 #define HomeSpanLed
-#include <HomeSpan.h>
 
 struct HSLed : Service::LightBulb {
 	led* Led;

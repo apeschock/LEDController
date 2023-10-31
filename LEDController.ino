@@ -1,7 +1,9 @@
 #include "BlynkControl.h"
 #include "LEDManager.h"
 #include "WifiControl.h"
+#include <HomeSpan.h>
 #include "HomespanSetup.h"
+#include "WizLightsSetup.h"
 
 //make a global led manager to access the leds from anywhere.
 LedManager ledmanager = LedManager();
@@ -29,6 +31,7 @@ void setup()
 
     //setup homespan (HomespanSetup.h)
     setupHomespan(&ledmanager);
+    setupWizLights();
 
 }
 
