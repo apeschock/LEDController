@@ -4,8 +4,24 @@
 //need fastLED to control
 #define FASTLED_INTERNAL
 #include <FastLED.h>
+struct colorParams_t {
+    bool powerState = false;
+    unsigned int brightness = 255;
+    unsigned int red = 255;
+    unsigned int blue = 255;
+    unsigned int green = 255;
+};
+
+struct blynkPins_t {
+    int power;
+    int brightness;
+    int redPin;
+    int greenPin;
+    int bluePin;
+};
 
 enum Strip { overhead, ambient, swingable };
+enum Source { None, BlynkServ, HomeSpan };
 
 class led{
   public:
@@ -27,20 +43,20 @@ class led{
     void updatePattern();
     void incHue();
     void switchPower(bool power);
-    struct colorParams_t {
-        bool powerState = false;
-        unsigned int brightness = 255;
-        unsigned int red = 255;
-        unsigned int blue = 255;
-        unsigned int green = 255;
-    }colorInfo;
+    colorParams_t colorInfo;
     unsigned int currentPattern = 0;
+    Strip getCurrentType();
+    void setHomespanCallback(std::function<void(colorParams_t)> HomespanCallback);
+    //void setBlynkConnection(BlynkWifi* BlynkConn);
+    Source LastModifyingService = None;
+    void setBlynkPins(int power, int bright, int red, int green, int blue);
 
   private:
     //Need constants for FastLED library.
     static const EOrder colorOrder = GRB;
     static const LEDColorCorrection colorCorrect = TypicalSMD5050;
     const int MAX_BRIGHTNESS = 255;
+    //Constants for LedAmounts and Pins
     static const int numLedOverhead = 107;
     static const int pinLedOverhead = 4;
     static const int numLedAmbient = 84;
@@ -53,6 +69,12 @@ class led{
     uint8_t gHue = 0;
     CRGB* leds;
     unsigned int numLeds;
+    Strip currentType;
+    std::function<void(colorParams_t)> homespanCallback;
+    //BlynkWifi* blynkConn;
+    void updateExternalGuis();
+    blynkPins_t blynkPins;
+    void writeBlynkData();
 };
 
 #endif

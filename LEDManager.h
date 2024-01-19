@@ -1,7 +1,7 @@
 #ifndef LEDManager
 #define LEDManager
+//#include "BlynkSimpleEsp32Fixed.h"
 #include "led.h"
-#include "BlynkSimpleEsp32Fixed.h"
 
 class LedManager {
 private:
@@ -14,5 +14,4 @@ public:
 	void loading();
 	void connected();
 };
-
 #endif

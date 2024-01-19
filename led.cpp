@@ -8,16 +8,20 @@ led::led(Strip strip){
         leds = new CRGB[numLedOverhead];
         numLeds = numLedOverhead;
         FastLED.addLeds<WS2812B, pinLedOverhead, colorOrder>(leds, numLedOverhead).setCorrection(colorCorrect);
+        currentType = overhead;
         break;
     case ambient:
         leds = new CRGB[numLedAmbient];
         numLeds = numLedAmbient;
         FastLED.addLeds<WS2812B, pinLedAmbient, colorOrder>(leds, numLedAmbient).setCorrection(colorCorrect);
+        currentType = ambient;
         break;
     case swingable:
         leds = new CRGB[numLedSwing];
         numLeds = numLedSwing;
         FastLED.addLeds<WS2812B, pinLedSwing, colorOrder>(leds, numLedSwing).setCorrection(colorCorrect);
+        currentType = swingable;
+        break;
     }
 }
 
@@ -48,6 +52,7 @@ void led::setColor() {
         leds[i] = CRGB(colorInfo.red, colorInfo.green, colorInfo.blue);
     }
     FastLED.show();
+    updateExternalGuis();
 }
 
 void led::setColor(unsigned int r, unsigned int g, unsigned int b) {
@@ -63,6 +68,7 @@ void led::setColorAndSave(unsigned int r, unsigned int g, unsigned int b) {
     colorInfo.red = r;
     colorInfo.green = g;
     colorInfo.blue = b;
+    updateExternalGuis();
 }
 
 void led::switchPower(bool power) {
@@ -79,6 +85,7 @@ void led::switchPower(bool power) {
         }
         FastLED.show();
     }
+    updateExternalGuis();
 }
 
 void led::setBrightness(unsigned int brightness) {
@@ -147,6 +154,7 @@ void led::slowFadeTo(unsigned int desiredBrightness) {
         setBrightness(--colorInfo.brightness);
     }
     FastLED.show();
+    updateExternalGuis();
 }
 
 void led::updatePattern() {
@@ -163,4 +171,40 @@ void led::updatePattern() {
 
 void led::incHue() {
     ++gHue;
+}
+
+Strip led::getCurrentType() {
+    return currentType;
+}
+
+void led::setBlynkPins(int power, int bright, int red, int green, int blue) {
+    blynkPins.power = power;
+    blynkPins.brightness = bright;
+    blynkPins.redPin = red;
+    blynkPins.greenPin = green;
+    blynkPins.bluePin = blue;
+}
+
+void led::writeBlynkData() {
+    //blynkConn->virtualWrite(3, 125);
+}
+
+void led::setHomespanCallback(std::function<void(colorParams_t)> HomespanCallback) {
+    homespanCallback = HomespanCallback;
+}
+
+void led::updateExternalGuis() {
+    switch (LastModifyingService) {
+    case None:
+        //Nothing has modified data since last refresh
+        //Otherwise update the other service with new data
+        break;
+    case BlynkServ:
+        homespanCallback(this->colorInfo);
+        break;
+    case HomeSpan:
+        writeBlynkData();
+        break;
+    }
+    LastModifyingService = None;
 }

@@ -19,20 +19,16 @@ void WizLight::SetDim(unsigned char value) {
     udpSend(cmd);
 }
 
-bool WizLight::GetState() {
-    return false;
-}
-
 void WizLight::udpSend(String cmd) {
     byte buffer[cmd.length() + 1];
     cmd.getBytes(buffer, cmd.length() + 1);
     udp.beginPacket(udpAdd, udpPort);
     udp.write(buffer, cmd.length());
     udp.endPacket();
-    checkPrintPacket();
+    getPacket();
 }
 
-void WizLight::checkPrintPacket() {
+char* WizLight::getPacket() {
     char packet[255];
     int packetSize = udp.parsePacket();
     if (packetSize) {
@@ -41,4 +37,24 @@ void WizLight::checkPrintPacket() {
             packet[len] = '\0';
         }
     }
+    return packet;
+}
+
+WizLightInfo WizLight::GetState() {
+    StaticJsonDocument<250> doc;
+    
+    udpSend(Commands.Pilot);
+    char* json = getPacket();
+
+    DeserializationError error = deserializeJson(doc, json);
+
+    if (error) {
+        Serial.println("Error parsing Json");
+        return currentState;
+    }
+
+    currentState.state = doc["results"][3];
+    Serial.println(currentState.state);
+
+    return this->currentState;
 }

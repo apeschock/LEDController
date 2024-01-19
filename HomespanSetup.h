@@ -1,6 +1,12 @@
 #ifndef HomespanSetup
 #define HomespanSetup
+#include <HomeSpan.h>
 #include "HomeSpanLed.h"
+
+HSLed* over;
+HSLed* amb;
+const long DELAY_TIME = 1 * 60 * 1000UL;
+static long lastTime = 0;
 
 void setupHomespan(LedManager* ledManager) {
 	//setup HomeSpan for Homekit integration
@@ -9,14 +15,13 @@ void setupHomespan(LedManager* ledManager) {
 		new Service::AccessoryInformation();
 			new Characteristic::Identify();
 			new Characteristic::Name("Overhead");
-		new HSLed(&ledManager->over);
+		over = new HSLed(&ledManager->over);
 
 	new SpanAccessory();
 		new Service::AccessoryInformation();
 			new Characteristic::Identify();
 			new Characteristic::Name("Ambient");
-		new HSLed(&ledManager->amb);
+		amb = new HSLed(&ledManager->amb);
 }
-
 
 #endif //HomespanSetup

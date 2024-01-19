@@ -1,13 +1,12 @@
-#include "BlynkControl.h"
+#include <functional>
+//#include "BlynkControl.h"
 #include "LEDManager.h"
-#include "WifiControl.h"
-#include <HomeSpan.h>
 #include "HomespanSetup.h"
-#include "WizLightsSetup.h"
+//#include "WifiControl.h"
 
 //make a global led manager to access the leds from anywhere.
 LedManager ledmanager = LedManager();
-WifiControl wifi;
+//WifiControl wifi;
 
 void setup()
 {
@@ -21,31 +20,30 @@ void setup()
     ledmanager.loading();
     
     //start the wifi service
-    wifi.startWifi();
+    //wifi.startWifi();
 
     //launch the blynk service
-    BlynkStart();
+    //BlynkStart();
 
     //getting here means blynk has connected
     ledmanager.connected();
 
     //setup homespan (HomespanSetup.h)
     setupHomespan(&ledmanager);
-    setupWizLights();
 
 }
 
 void loop() 
 {
     //Call an update everytime so that patterns will animate
-    ledmanager.updatePattern();
+    //ledmanager.updatePattern();
     
     //reconnect to wifi if the connection is lost
-    wifi.checkConnection();
-    BlynkStart::confirmBlynkConnection();
+    //wifi.checkConnection();
+    //BlynkStart::confirmBlynkConnection();
 
     //get updates from blynk and remain connected.
-    Blynk.run();
+    //Blynk.run();
     
     //Homespan run
     homeSpan.poll();
